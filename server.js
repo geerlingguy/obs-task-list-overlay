@@ -5,8 +5,12 @@ var path = require('path');
 var step = 1;
 var fs = require('fs');
 
+// Load in the config.
 let rawconfig = fs.readFileSync('config.json');
 let config = JSON.parse(rawconfig);
+
+// Set up the static asset directory.
+app.use(express.static('public'));
 
 // Respond to requests for / with index.html.
 app.get('/', function(req, res){
