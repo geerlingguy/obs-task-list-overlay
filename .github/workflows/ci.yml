@@ -23,13 +23,12 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies and forever.
-        run: |
-          npm install
-          npm install forever -g
+      - name: Install dependencies.
+        run: npm install
 
       - name: Run app.
-        run: forever start server.js
+        run: >
+          nohup node server.js &
 
       - name: Test '/' path.
         run: >
