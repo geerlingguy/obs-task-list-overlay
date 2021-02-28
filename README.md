@@ -1,5 +1,7 @@
 # OBS Task List / Checklist Overlay
 
+[![CI](https://github.com/geerlingguy/obs-task-list-overlay/actions/workflows/ci.yml/badge.svg?branch=master&event=push)](https://github.com/geerlingguy/obs-task-list-overlay/actions/workflows/ci.yml)
+
 An HTML and Node.js-based task list overlay for OBS.
 
 TODO: Image of task list in OBS here.

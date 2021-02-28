@@ -31,6 +31,10 @@ jobs:
       - name: Run app.
         run: forever start server.js
 
+      - name: Test '/' path.
+        run: >
+          curl -s localhost
+
       - name: Test 'current' path.
         run: >
           curl -s localhost/current | grep "1"
