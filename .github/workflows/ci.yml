@@ -1,0 +1,44 @@
+---
+name: CI
+'on':
+  pull_request:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 2 * * 0"
+
+jobs:
+
+  node-test:
+    name: Node Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js.
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies and forever.
+        run: |
+          npm install
+          npm install forever -g
+
+      - name: Run app.
+        run: forever start server.js
+
+      - name: Test 'current' path.
+        run: >
+          curl -s localhost/current | grep "1"
+
+      - name: Test 'up' path.
+        run: >
+          curl -s localhost/up | grep "New value: 2"
+
+      - name: Test 'down' path.
+        run: >
+          curl -s localhost/down | grep "New value: 1"

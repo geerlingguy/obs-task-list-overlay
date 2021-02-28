@@ -24,6 +24,6 @@ app.get('/down', function(req, res){
     res.send('New value: ' + step);
 });
 
-// Listen on port 80 (like a true web server).
+// Listen on port 80.
 app.listen(80);
 console.log('Express server started successfully.');

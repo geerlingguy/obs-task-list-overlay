@@ -1,5 +1,7 @@
 # OBS Task List / Checklist Overlay
 
+An HTML and Node.js-based task list overlay for OBS.
+
 TODO: Image of task list in OBS here.
 
 I was frustrated with the lack of plugins that added a simple task list (with current task highlighted) to OBS, so I built this solution, which relies on OBS' 'Browser' source.
