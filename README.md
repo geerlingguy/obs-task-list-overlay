@@ -4,7 +4,7 @@
 
 An HTML and Node.js-based task list overlay for OBS.
 
-<img src="https://raw.githubusercontent.com/geerlingguy/obs-task-list-overlay/master/example" width="700" height="394" alt="OBS Task List Overlay Example with Jeff Geerling" />
+<img src="https://raw.githubusercontent.com/geerlingguy/obs-task-list-overlay/master/example.jpg" width="700" height="394" alt="OBS Task List Overlay Example with Jeff Geerling" />
 
 I was frustrated with the lack of plugins that added a simple task list (with current task highlighted) to OBS, so I built this solution, which relies on OBS' 'Browser' source.
 
