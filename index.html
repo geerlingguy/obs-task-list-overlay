@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OBS Overlay</title>
+    <!-- Refresh the screen every 5 seconds. -->
+    <!-- <meta http-equiv="refresh" content="5"> -->
+
+    <style type="text/css">
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 24px;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Styles for the stream title */
+      .title-wrapper {
+        margin: 20px 0px 2px;
+        display: inline-block;
+      }
+
+      .left, .right {
+        position: relative;
+        height: 70px;
+        width: 350px;
+        background-color: #bc1142;
+        float: left;
+        font-size: 55px;
+        font-weight: normal;
+        font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+      }
+
+      .left span, .right span {
+        display: block;
+        padding: 6px 6px 6px 15px;
+      }
+
+      .left:after {
+        content: '';
+        line-height: 0;
+        font-size: 0;
+        width: 0;
+        height: 0;
+        border-top: 70px solid #bc1142;
+        border-bottom: 50px solid transparent;
+        border-left: 0px solid transparent;
+        border-right: 50px solid transparent;
+        position: absolute;
+        top: 0;
+        right: -50px;
+      }
+
+      .right {
+        margin-left: 60px;
+        width: 125px;
+        color: #bc1142;
+        background-color: #fff;
+      }
+
+      .right:before {
+        content: '';
+        line-height: 0;
+        font-size: 0;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent;
+        border-bottom: 70px solid #fff;
+        border-left: 50px solid transparent;
+        border-right: 0px solid #fff;
+        position: absolute;
+        top: -50px;
+        left: -50px;
+      }
+
+      /* Styles for the todo list */
+      .todo-wrapper {
+        background-color: rgba(0, 0, 0, 0.5);
+        margin: 2px 0 20px;
+        width: 320px;
+      }
+
+      .todo-list {
+        margin: 5px 0;
+        padding: 20px 0;
+        list-style-type: none;
+      }
+
+      .todo-list li {
+        margin: 0;
+        padding: 6px 20px;
+      }
+
+      .todo-list li.active {
+        color: #000;
+        background-color: #fff;
+      }
+    </style>
+
+    <!-- Load jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Javascript to update checklist with current step -->
+    <script>
+      var step = 1;
+      var refresh_delay = 1000;
+
+      function update_active_step() {
+        $.get( "http://localhost/current", function(data) {
+          // If the current step is changed, update list.
+          if (data !== step) {
+            $("ul.todo-list li:nth-child(" + String(step) + ")").removeClass('active');
+            step = Number(data);
+            $("ul.todo-list li:nth-child(" + String(step) + ")").addClass('active');
+          }
+          else {
+            $("ul.todo-list li:nth-child(" + String(step) + ")").addClass('active');
+          }
+        });
+      }
+
+      $(document).ready(function(e) {
+        // Set active step immediately, then update in loop.
+        update_active_step();
+        var interval = setInterval(update_active_step, refresh_delay);
+      });
+    </script>
+
+</head>
+<body>
+
+  <div class="title-wrapper">
+    <div class="left"><span>16 Drives, 1 Pi</span></div>
+    <div class="right"><span>LIVE</span></div>
+  </div>
+  <div class="todo-wrapper">
+    <ul class="todo-list">
+      <li>Introduction</li>
+      <li>Wire up drives (data)</li>
+      <li>Wire up drives (power)</li>
+      <li>Turn on everything</li>
+      <li>Verify drives are seen</li>
+      <li>Create 16-drive volume</li>
+      <li>Run fio benchmarks</li>
+      <li>Run NFS benchmark</li>
+      <li>Questions & Answers</li>
+    </ul>
+  </div>
+
+</body>
+</html>
