@@ -4,7 +4,7 @@
 
 An HTML and Node.js-based task list overlay for OBS.
 
-TODO: Image of task list in OBS here.
+<img src="https://raw.githubusercontent.com/geerlingguy/obs-task-list-overlay/master/example" width="700" height="394" alt="OBS Task List Overlay Example with Jeff Geerling" />
 
 I was frustrated with the lack of plugins that added a simple task list (with current task highlighted) to OBS, so I built this solution, which relies on OBS' 'Browser' source.
 
@@ -47,9 +47,13 @@ Then start the local server:
 node server.js
 ```
 
-## Adding browser source in OBS
+## Adding the browser source in OBS
 
-TODO: Describe process.
+  1. In an OBS Scene, add a new 'Browser' Source.
+  2. For the URL, enter `http://localhost:8080/` (use the port you have configured in `config.json`).
+  3. Set the width to `1920` and height to `1080`.
+  4. Check the 'Refresh browser when scene becomes active' option.
+  5. Click 'OK', and the overlay should appear.
 
 ## Advancing to the next step
 

@@ -70,25 +70,25 @@
         left: -50px;
       }
 
-      /* Styles for the todo list */
-      .todo-wrapper {
+      /* Styles for the task list */
+      .task-list-wrapper {
         background-color: rgba(0, 0, 0, 0.5);
         margin: 2px 0 20px;
         width: 320px;
       }
 
-      .todo-list {
+      .task-list {
         margin: 5px 0;
         padding: 20px 0;
         list-style-type: none;
       }
 
-      .todo-list li {
+      .task-list li {
         margin: 0;
         padding: 6px 20px;
       }
 
-      .todo-list li.active {
+      .task-list li.active {
         color: #000;
         background-color: #fff;
       }
@@ -102,21 +102,38 @@
       var step = 1;
       var refresh_delay = 1000;
 
+      function load_config() {
+        $.get(window.location.href + "config", function(data) {
+          // Set the title.
+          $(".title-wrapper .left span").text(data.task_list_title);
+
+          // Set up the item list.
+          var $this = $("ul.task-list").empty();
+          items = data.task_list_items;
+          for (x in items) {
+            $("<li />").text(items[x]).appendTo($this);
+          }
+        });
+      }
+
       function update_active_step() {
-        $.get( "http://localhost/current", function(data) {
+        $.get(window.location.href + "current", function(data) {
           // If the current step is changed, update list.
           if (data !== step) {
-            $("ul.todo-list li:nth-child(" + String(step) + ")").removeClass('active');
+            $("ul.task-list li:nth-child(" + String(step) + ")").removeClass('active');
             step = Number(data);
-            $("ul.todo-list li:nth-child(" + String(step) + ")").addClass('active');
+            $("ul.task-list li:nth-child(" + String(step) + ")").addClass('active');
           }
           else {
-            $("ul.todo-list li:nth-child(" + String(step) + ")").addClass('active');
+            $("ul.task-list li:nth-child(" + String(step) + ")").addClass('active');
           }
         });
       }
 
       $(document).ready(function(e) {
+        // Load configuration.
+        load_config();
+
         // Set active step immediately, then update in loop.
         update_active_step();
         var interval = setInterval(update_active_step, refresh_delay);
@@ -127,20 +144,12 @@
 <body>
 
   <div class="title-wrapper">
-    <div class="left"><span>16 Drives, 1 Pi</span></div>
+    <div class="left"><span>TASK_LIST_TITLE</span></div>
     <div class="right"><span>LIVE</span></div>
   </div>
-  <div class="todo-wrapper">
-    <ul class="todo-list">
-      <li>Introduction</li>
-      <li>Wire up drives (data)</li>
-      <li>Wire up drives (power)</li>
-      <li>Turn on everything</li>
-      <li>Verify drives are seen</li>
-      <li>Create 16-drive volume</li>
-      <li>Run fio benchmarks</li>
-      <li>Run NFS benchmark</li>
-      <li>Questions & Answers</li>
+  <div class="task-list-wrapper">
+    <ul class="task-list">
+      <li>TASK_LIST_ITEM</li>
     </ul>
   </div>
 

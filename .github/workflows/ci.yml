@@ -28,20 +28,21 @@ jobs:
 
       - name: Run app.
         run: >
+          cp example.config.json config.json
           nohup node server.js &
 
       - name: Test '/' path.
         run: >
-          curl -s localhost
+          curl -s localhost:8080
 
       - name: Test 'current' path.
         run: >
-          curl -s localhost/current | grep "1"
+          curl -s localhost:8080/current | grep "1"
 
       - name: Test 'up' path.
         run: >
-          curl -s localhost/up | grep "New value: 2"
+          curl -s localhost:8080/up | grep "New value: 2"
 
       - name: Test 'down' path.
         run: >
-          curl -s localhost/down | grep "New value: 1"
+          curl -s localhost:8080/down | grep "New value: 1"
