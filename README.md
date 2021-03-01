@@ -75,4 +75,14 @@ The count can increase above the maximum number of items in your list, or below 
 
 ### Using an Elgato Stream Deck to advance steps
 
-TODO.
+I use a Stream Deck to help with my live streaming, and I've created two buttons for this overlay, a 'back' (`/down`) and 'forward' (`/up`) key.
+
+When I press the back button, the task list goes back one step.
+
+When I press the forward button, the task list goes forward one step.
+
+To add a hotkey in the 'Configure Stream Deck' app, drag a 'Website' button from the 'System' section into one of the slots on your Stream Deck.
+
+Then set the URL to `http://localhost/up` (or `/down`), and check 'Access in background'.
+
+Now, when you press that key, the appropriate URL is called silently and the on-screen task list should advance or go back a step depending on the button you pressed. Magic!
