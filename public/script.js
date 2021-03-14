@@ -5,6 +5,8 @@ function load_config() {
   $.get(window.location.href + "config", function(data) {
     // Set the title.
     $(".title-wrapper .left span").text(data.task_list_title);
+    // Set the title width.
+    $(".title-wrapper .left").width(data.task_list_title_width);
 
     // Set up the item list.
     var $this = $("ul.task-list").empty();
