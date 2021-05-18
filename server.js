@@ -29,11 +29,15 @@ app.get('/config', function(req, res){
 
 // Allow incrementing or decrementing the step via /up or /down.
 app.get('/up', function(req, res){
-    step++;
+    if (step < config.task_list_items.length){
+        step++;
+    }
     res.send('New value: ' + step);
 });
 app.get('/down', function(req, res){
-    step--;
+    if (step > 1){
+        step--;
+    }
     res.send('New value: ' + step);
 });
 
