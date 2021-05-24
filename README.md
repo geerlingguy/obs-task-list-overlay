@@ -50,6 +50,29 @@ You can open the overlay in a regular web browser by visiting `http://localhost:
 
 Always use OBS as the final reference for how things will look during a stream!
 
+## Using Docker Compose
+
+To use the Docker images configured with compose, you need [docker-compose](https://docs.docker.com/compose/install/). Once it's up a running, you simply do
+
+```
+docker-compose up --detach
+```
+
+To stop the server
+
+```
+docker-compose down
+```
+
+The config maps container's `8080` port to `localhost:8080`. If you need to use another localhost port, you need to change it in `docker-compose.yml` under the `ports` section. For example, to use the port `3000` you need to set the section as:
+
+```yaml
+    ports:
+      - "3000:8080"
+```
+
+The port number after the colon would be the port configured in `config.json`.
+
 ## Adding the browser source in OBS
 
   1. In an OBS Scene, add a new 'Browser' Source.
